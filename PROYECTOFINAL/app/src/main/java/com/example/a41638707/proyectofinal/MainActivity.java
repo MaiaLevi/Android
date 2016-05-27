@@ -22,12 +22,13 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
+String url="10.152.2.45";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+    //CAMBIAR NOMBR DE CLASE
 private class GeolocalizacionTask extends AsyncTask<String, Void, ArrayList<Evento>> {
     private OkHttpClient client = new OkHttpClient();
     @Override
@@ -36,7 +37,7 @@ private class GeolocalizacionTask extends AsyncTask<String, Void, ArrayList<Even
     }
     @Override
     protected ArrayList<Evento> doInBackground(String... params) {
-        String url = params[0];
+
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -54,31 +55,35 @@ private class GeolocalizacionTask extends AsyncTask<String, Void, ArrayList<Even
     ArrayList<Evento> parsearResultado(String JSONstr) throws JSONException {
         ArrayList<Evento> eventos = new ArrayList<>();
         JSONObject json = new JSONObject(JSONstr);                 // Convierto el String recibido a JSONObject
-        JSONArray jsonEventos = json.getJSONArray("results");  // Array - una busqueda puede retornar varios resultados
+        JSONArray jsonEventos = json.getJSONArray("results");
+        Date result=(2016-05-12T00:00:00);
+        // Array - una busqueda puede retornar varios resultados
         for (int i=0; i<jsonEventos.length(); i++) {
             // Recorro los resultados recibidos
             JSONObject jsonResultado = jsonEventos.getJSONObject(i);
-            /*String jsonAddress = jsonResultado.getString("formatted_address");  // Obtiene la direccion formateada
-            JSONObject jsonGeometry = jsonResultado.getJSONObject("geometry");
-            JSONObject jsonLocation = jsonGeometry.getJSONObject("location"); ESTO NO LO NECESITAMOS*/
-            int jsonId = jsonResultado.getInt("Id");//variables y cambiar nombre                     // Obtiene latitud
-            String jsonMat = jsonResultado.getString("Materia");                     // Obtiene longitud
+            int jsonId = jsonResultado.getInt("Id");
+            String jsonMat = jsonResultado.getString("Materia");
             String jsonTipo = jsonResultado.getString("Tipo");
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH");
             String Fecha=jsonResultado.getString("Fecha");
-            Date result =  df.parse(Fecha);
-            String jsonDesc = jsonResultado.getString("Descripcion");                     // Obtiene longitud
-           //no lo necesitamos String coord = jsonLat + "," + jsonLng;
+
+            try {
+                result = df.parse(Fecha);
+            }catch (Exception e) {
+
+            }
+            String jsonDesc = jsonResultado.getString("Descripcion");
             Evento d = new Evento();                    // Creo nueva instancia de direccion
             d.Id=jsonId;
             d.Materia=jsonMat;
             d.Tipo=jsonTipo;
-            //d.Fecha=jsonFecha;
+            d.Fecha=result;
             d.Descripcion=jsonDesc;
             eventos.add(d);                                                 // Agrego objeto d al array list
         }
         return eventos;
     }
+
 }
 }
 
