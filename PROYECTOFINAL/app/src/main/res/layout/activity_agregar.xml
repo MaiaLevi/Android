@@ -57,10 +57,15 @@
             android:layout_height="0dp" />
 
         <TimePicker
+
             android:id="@+id/time_picker"
             android:layout_weight="4"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:layout_height="0dp"
+            android:visibility="invisible"/>
+        <!--
+  Lo oculté porque no se si lo usamos o no y porque ocupa todo lo que queda
+  -->
 
     </LinearLayout>
 </RelativeLayout>
