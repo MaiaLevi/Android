@@ -26,21 +26,24 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     public static final ArrayList<Evento> PARAMETRO1=new ArrayList<Evento>();
-String url="10.152.2.45/api/Evento";
+    String url="http://10.0.2.2:11504/api/Evento";
     Button btnListar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ObtenerReferencias();
+        btnListar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new ListarEventos().execute(url);
+                IniciarListarActividad();
+            }
+        });
     }
     ArrayList<Evento> eventos = new ArrayList<>();
     private void ObtenerReferencias()
     {
         btnListar=(Button)findViewById(R.id.btnListar);
-    }
-    public void btnListar_Click(View view)
-    {
-        IniciarListarActividad();
     }
     private void IniciarListarActividad()
     {
@@ -64,9 +67,9 @@ private class ListarEventos extends AsyncTask<String, Void, ArrayList<Evento>> {
                 .url(url+"/Get")
                 .build();
         try {
+
             Response response = client.newCall(request).execute();  // Llamado al API
             return parsearResultado(response.body().string());      // Convierto el resultado en ArrayList<Direccion>
-
         } catch (IOException | JSONException e) {
             Log.d("Error",e.getMessage());                          // Error de Network o al parsear JSON
             return new ArrayList<Evento>();

@@ -26,26 +26,30 @@ public class Listar extends AppCompatActivity {
         Intent elIntent=getIntent();
         Bundle datos=elIntent.getExtras();
         ListadoEventos=(ArrayList<Evento>)datos.getSerializable("key");
-        /*for (int i=0; i<ListadoEventos.size();i++)
+        Evento[] vectorEventos=new Evento[]{};
+        for (int i=0; i<ListadoEventos.size();i++)
         {
             Evento MiEvento=ListadoEventos.get(i);
+            //Hacer un array y ponerlo en adapter y setearlo en la lista?
+            vectorEventos[i]=MiEvento;
 
-        }*/
+        }
         //Mostrar Materia, Tipo y Fecha
-        ArrayAdapter<Evento> adaptador=new ArrayAdapter<Evento>(this,android.R.layout.simple_list_item_1,ListadoEventos);
+        ArrayAdapter<Evento> adaptador=new ArrayAdapter<Evento>(this,android.R.layout.simple_list_item_1,vectorEventos);
         ObtenerReferencias();
         lstEventos.setAdapter(adaptador);
-
+        btnAtras.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                irAtras();
+            }
+        });
     }
     private void ObtenerReferencias()
     {
         btnAtras=(Button) findViewById(R.id.btnAtras);
         lstEventos=(ListView)findViewById(R.id.lstEventos);
     }
-    public void btnAtras_Click(View view)
-    {
-        irAtras();
-    }
+
     private void irAtras()
     {
        this.finish();
@@ -62,29 +66,20 @@ public class Listar extends AppCompatActivity {
 
     });ERROR*/
     class AdaptadorTitulares extends ArrayAdapter {
-
         Activity context;
 
         AdaptadorTitulares(Activity context) {
-
             super(context, R.layout.listitem, ListadoEventos);
-
             this.context = context;
 
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-
             LayoutInflater inflater = context.getLayoutInflater();
-
             View item = inflater.inflate(R.layout.listitem, null);
-
             TextView lblMateria = (TextView)item.findViewById(R.id.LblMateria);
-
             lblMateria.setText(ListadoEventos.get(position).getMateria());
-
             TextView lblTipo= (TextView)item.findViewById(R.id.LblTipo);
-
             lblTipo.setText(ListadoEventos.get(position).getTipo());
             TextView lblFecha=(TextView) item.findViewById(R.id.LblFecha);
             SimpleDateFormat formatter =new  SimpleDateFormat("yyyy-MM-dd'T'HH");
