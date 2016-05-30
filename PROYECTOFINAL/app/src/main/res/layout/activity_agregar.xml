@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.a41638707.proyectofinal.Agregar">
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,24 +38,55 @@
             android:text="Elija una fecha"
             android:id="@+id/tvwFecha"
             android:textSize="25sp" />
-        <DatePicker
-            android:id="@+id/date_picker"
-            android:layout_width="match_parent"
-            android:calendarViewShown="true"
-            android:spinnersShown="false"
-            android:layout_weight="4"
-            android:layout_height="0dp" />
 
-        <TimePicker
+    <DatePicker
+        android:id="@+id/date_picker"
+        android:layout_width="wrap_content"
+        android:calendarViewShown="true"
+        android:spinnersShown="false"
+        android:layout_height="102dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingrese la descripción"
+        android:id="@+id/tvwDescr"
+        android:textSize="25sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtDescr" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:id="@+id/btnCancelar"
+            android:layout_gravity="left"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:id="@+id/btnGuardar"
+            android:layout_gravity="right" />
+    </LinearLayout>
+
+    <TimePicker
 
             android:id="@+id/time_picker"
-            android:layout_weight="4"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        android:layout_width="369dp"
+            android:layout_height="107dp"
             android:visibility="invisible"/>
-        <!--
-  Lo oculté porque no se si lo usamos o no y porque ocupa todo lo que queda
-  -->
+    <!--
+Lo oculté porque no se si lo usamos o no y porque ocupa todo lo que queda
+-->
 
     </LinearLayout>
-</RelativeLayout>
