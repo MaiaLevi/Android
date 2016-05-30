@@ -19,6 +19,7 @@ public class Listar extends AppCompatActivity {
     ListView lstEventos;
     ArrayList<Evento> ListadoEventos;
     Button btnAtras;
+    Evento[] vectorEventos=new Evento[]{};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,6 @@ public class Listar extends AppCompatActivity {
         Intent elIntent=getIntent();
         Bundle datos=elIntent.getExtras();
         ListadoEventos=(ArrayList<Evento>)datos.getSerializable("key");
-        Evento[] vectorEventos=new Evento[]{};
         for (int i=0; i<ListadoEventos.size();i++)
         {
             Evento MiEvento=ListadoEventos.get(i);
@@ -38,6 +38,7 @@ public class Listar extends AppCompatActivity {
         ArrayAdapter<Evento> adaptador=new ArrayAdapter<Evento>(this,android.R.layout.simple_list_item_1,vectorEventos);
         ObtenerReferencias();
         lstEventos.setAdapter(adaptador);
+        new AdaptadorTitulares(Listar.this);
         btnAtras.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 irAtras();
@@ -69,7 +70,7 @@ public class Listar extends AppCompatActivity {
         Activity context;
 
         AdaptadorTitulares(Activity context) {
-            super(context, R.layout.listitem, ListadoEventos);
+            super(context, R.layout.listitem, vectorEventos);
             this.context = context;
 
         }
@@ -78,12 +79,12 @@ public class Listar extends AppCompatActivity {
             LayoutInflater inflater = context.getLayoutInflater();
             View item = inflater.inflate(R.layout.listitem, null);
             TextView lblMateria = (TextView)item.findViewById(R.id.LblMateria);
-            lblMateria.setText(ListadoEventos.get(position).getMateria());
+            lblMateria.setText(vectorEventos[position].getMateria());
             TextView lblTipo= (TextView)item.findViewById(R.id.LblTipo);
-            lblTipo.setText(ListadoEventos.get(position).getTipo());
+            lblTipo.setText(vectorEventos[position].getTipo());
             TextView lblFecha=(TextView) item.findViewById(R.id.LblFecha);
             SimpleDateFormat formatter =new  SimpleDateFormat("yyyy-MM-dd'T'HH");
-            String s= formatter.format(ListadoEventos.get(position).getFecha());
+            String s= formatter.format(vectorEventos[position].getFecha());
             lblFecha.setText(s);
             return(item);
 
