@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -22,11 +23,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    public static final ArrayList<Evento> PARAMETRO1=new ArrayList<Evento>();
-    String url="http://10.0.2.2:11504/api/Evento";
+   // public static final ArrayList<Evento> PARAMETRO1=new ArrayList<Evento>();
+    String url="192.168.56.1";
     Button btnListar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +37,13 @@ public class MainActivity extends AppCompatActivity {
         ObtenerReferencias();
         btnListar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                new ListarEventos().execute(url);
+                //new ListarEventos().execute(url);
+             //NO ANDA   List<Evento> lisLin= (List<Evento>) new ProgressTask(MainActivity.this).execute("192.168.56.1/listareventos.php");
                 IniciarListarActividad();
             }
         });
     }
+
     ArrayList<Evento> eventos = new ArrayList<>();
     private void ObtenerReferencias()
     {
@@ -47,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
     }
     private void IniciarListarActividad()
     {
-        Intent nuevaActivity=new Intent(this,Listar.class);
-        Bundle datos=new Bundle();
+        Intent nuevaActivity=new Intent(MainActivity.this,Listar.class);
+        /*Bundle datos=new Bundle();
         nuevaActivity.setClass(MainActivity.this,Evento.class);
         datos.putSerializable("key",eventos);
-        nuevaActivity.putExtras(datos);
+        nuevaActivity.putExtras(datos);*/
         startActivity(nuevaActivity);
-    }
+    }/*
 private class ListarEventos extends AsyncTask<String, Void, ArrayList<Evento>> {
     private OkHttpClient client = new OkHttpClient();
     @Override
@@ -62,9 +66,9 @@ private class ListarEventos extends AsyncTask<String, Void, ArrayList<Evento>> {
     }
     @Override
     protected ArrayList<Evento> doInBackground(String... params) {
-
+        String url=params[0];
         Request request = new Request.Builder()
-                .url(url+"/Get")
+                .url(url+"/listareventos.php")
                 .build();
         try {
 
@@ -104,6 +108,6 @@ private class ListarEventos extends AsyncTask<String, Void, ArrayList<Evento>> {
         return eventos;
     }
 
-}
+}*/
 }
 

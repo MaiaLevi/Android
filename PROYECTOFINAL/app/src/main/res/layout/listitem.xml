@@ -18,7 +18,7 @@
 
         android:textStyle="bold"
 
-        android:textSize="20px" />
+        android:textSize="30sp" />
 
     <TextView android:id="@+id/LblTipo"
 
@@ -28,7 +28,7 @@
 
         android:textStyle="normal"
 
-        android:textSize="12px" />
+        android:textSize="20sp" />
     <TextView android:id="@+id/LblFecha"
 
     android:layout_width="fill_parent"
@@ -37,6 +37,6 @@
 
     android:textStyle="normal"
 
-    android:textSize="12px" />
+    android:textSize="20sp" />
 
 </LinearLayout>
