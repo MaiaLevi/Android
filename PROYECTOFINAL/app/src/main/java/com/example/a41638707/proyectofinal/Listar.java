@@ -101,7 +101,9 @@ public class Listar extends AppCompatActivity {
         Intent nuevaActivity=new Intent(this,Modificar.class);
         Bundle datos=new Bundle();
         Evento Mio=list.get(i);
-        nuevaActivity.putExtra(Listar.PARAMETRO1,Mio);
+        //nuevaActivity.putExtra(Listar.PARAMETRO1,Mio);
+        datos.putSerializable(Listar.PARAMETRO1,Mio);
+        nuevaActivity.putExtras(datos);
         startActivity(nuevaActivity);
     }
     private void irAtras()

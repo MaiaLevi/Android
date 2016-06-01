@@ -6,14 +6,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-
+/*
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+*/
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 /**
  * Created by 42038123 on 31/5/2016.
- */
+ *//*
     class ProgressTask extends AsyncTask<String, Void, List<Evento>> {
         private ProgressDialog dialog;
 
@@ -97,5 +97,5 @@ import java.util.List;
         }
 
 
-    }
+    }*/
 
