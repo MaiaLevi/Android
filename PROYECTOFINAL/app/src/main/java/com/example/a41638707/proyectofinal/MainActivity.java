@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
    // public static final ArrayList<Evento> PARAMETRO1=new ArrayList<Evento>();
     String url="192.168.56.1";
     Button btnListar;
+    Button btnAgregar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +43,23 @@ public class MainActivity extends AppCompatActivity {
                 IniciarListarActividad();
             }
         });
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                IniciarAgregarActividad();;
+            }
+        });
     }
 
     ArrayList<Evento> eventos = new ArrayList<>();
     private void ObtenerReferencias()
     {
+        btnAgregar=(Button) findViewById(R.id.btnAgregar);
         btnListar=(Button)findViewById(R.id.btnListar);
+    }
+    private void IniciarAgregarActividad()
+    {
+        Intent nuevaActivity=new Intent(MainActivity.this,Agregar.class);
+        startActivity(nuevaActivity);
     }
     private void IniciarListarActividad()
     {

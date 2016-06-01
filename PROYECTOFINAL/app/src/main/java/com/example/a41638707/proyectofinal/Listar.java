@@ -43,8 +43,9 @@ public class Listar extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         if (extras != null) {
             bundle=1;
-             EventoCambiado=(Evento)extras.getSerializable(Modificar.PARAMETRO2);
+            EventoCambiado=(Evento)extras.getSerializable(Modificar.PARAMETRO2);
         }
+        Boolean blnEntra=false;
         for (int i=0; i<6 ; i++) {
             Evento prueba = new Evento();
             SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
@@ -73,6 +74,10 @@ public class Listar extends AppCompatActivity {
                                     prueba.Evento(4, "Matemática", "Prueba", date, "Función por tramos");
                                 } else {
                                     prueba.Evento(5, "SSI", "TP", date, "S.O.");
+                                    if (i == 5 && blnEntra == false) {
+                                        //cuando se agrega un evento entra aca
+                                        prueba.Evento(EventoCambiado.getId(), EventoCambiado.getMateria(), EventoCambiado.getTipo(), EventoCambiado.getFecha(), EventoCambiado.getDescripcion());
+                                    }
                                 }
                             }
                         }
@@ -83,6 +88,7 @@ public class Listar extends AppCompatActivity {
             {
                 if (EventoCambiado.getId()==i) {
                     prueba.Evento(EventoCambiado.getId(), EventoCambiado.getMateria(), EventoCambiado.getTipo(), EventoCambiado.getFecha(), EventoCambiado.getDescripcion());
+                    blnEntra=true;
                 }
             }
             list.add(prueba);
