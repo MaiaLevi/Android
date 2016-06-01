@@ -27,9 +27,10 @@ import java.util.Random;
 public class Listar extends AppCompatActivity {
     public static final String PARAMETRO1="com.example.a41638707.proyectofinal.PARAMETRO1";
     ListView lstEventos;
-    ArrayList<Evento> ListadoEventos;
+   //ArrayList<Evento> ListadoEventos;
     Button btnAtras;
     int param;
+    int bundle;
     //Evento[] vectorEventos=new Evento[]{};
     List<Evento> list = new ArrayList<Evento>();
     @Override
@@ -38,21 +39,23 @@ public class Listar extends AppCompatActivity {
         setContentView(R.layout.activity_listar);
         AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
         Evento EventoCambiado=new Evento();
-        /*BUSCAR COMO HACER PARA QUE ESTO SOLO SE EJECUTE CUANDO SE VUELVE EDE LA ACTIVITY DE MODIFICAR
-        Intent elIntent=getIntent();
-        Bundle datos=elIntent.getExtras();
-        Evento EventoCambiado=(Evento)datos.getSerializable(Modificar.PARAMETRO2);*/
-        for (int i=0; i<5;i++) {
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if (extras != null) {
+            bundle=1;
+             EventoCambiado=(Evento)extras.getSerializable(Modificar.PARAMETRO2);
+        }
+        for (int i=0; i<6 ; i++) {
             Evento prueba = new Evento();
             SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date();
-            Random rand = new Random();
             try {
                 date = fmt.parse("2016-06-06");
             } catch (Exception e) {
 
             }
-            if (!(EventoCambiado.getId()==i)) {
+            if (bundle==0||!(EventoCambiado.getId()==i))
+            {
                 if (i==0) {
                     prueba.Evento(0, "Ética", "TP", date, "Marxismo");
                 }
@@ -78,9 +81,12 @@ public class Listar extends AppCompatActivity {
             }
             else
             {
-                prueba.Evento(EventoCambiado.getId(),EventoCambiado.getMateria(),EventoCambiado.getTipo(),EventoCambiado.getFecha(),EventoCambiado.getDescripcion());
+                if (EventoCambiado.getId()==i) {
+                    prueba.Evento(EventoCambiado.getId(), EventoCambiado.getMateria(), EventoCambiado.getTipo(), EventoCambiado.getFecha(), EventoCambiado.getDescripcion());
+                }
             }
             list.add(prueba);
+            //actualizarlo en vector
         }
        /* for (int i=0; i<list.size();i++)
         {

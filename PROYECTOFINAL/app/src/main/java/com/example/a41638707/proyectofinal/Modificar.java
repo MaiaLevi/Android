@@ -59,7 +59,7 @@ public class Modificar extends AppCompatActivity {
         int positionMateria=0;
         for (int i=0;i<Materia.length;i++)
         {
-            if (Materia[i]==MiEvento.getMateria())
+            if (MiEvento.getMateria().equals(Materia[i]))
             {
                 positionMateria=i;
             }
@@ -67,7 +67,7 @@ public class Modificar extends AppCompatActivity {
         int positionTipo=0;
         for (int i=0;i<Tipo.length;i++)
         {
-            if (Tipo[i]==MiEvento.getTipo())
+            if (MiEvento.getTipo().equals(Tipo[i]))
             {
                 positionTipo=i;
             }
@@ -115,6 +115,7 @@ public class Modificar extends AppCompatActivity {
                 MiEvento.Evento(id ,strMate,strTipo,result ,strDescr);
                 Toast.makeText(getApplicationContext(), "Se ha guardado el evento", Toast.LENGTH_SHORT).show();
                 GuardarEvento();
+                irAtras();
             }
         });
     }
