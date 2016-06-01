@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
         datos.putSerializable("key",eventos);
         nuevaActivity.putExtras(datos);*/
         startActivity(nuevaActivity);
-    }/*
+    }
+    /*
 private class ListarEventos extends AsyncTask<String, Void, ArrayList<Evento>> {
     private OkHttpClient client = new OkHttpClient();
     @Override

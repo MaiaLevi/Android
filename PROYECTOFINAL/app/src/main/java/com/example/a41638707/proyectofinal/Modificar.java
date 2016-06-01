@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Modificar extends AppCompatActivity {
+    public static final String PARAMETRO2="com.example.a41638707.proyectofinal.PARAMETRO2";
     TextView tvwId;
     DatePicker date_picker;
     EditText edtDescr;
@@ -112,10 +113,19 @@ public class Modificar extends AppCompatActivity {
                 String strTipo=spnTipos.getSelectedItem().toString();
                 String strDescr=edtDescr.getText().toString();
                 MiEvento.Evento(id ,strMate,strTipo,result ,strDescr);
-                irAtras();
                 Toast.makeText(getApplicationContext(), "Se ha guardado el evento", Toast.LENGTH_SHORT).show();
+                GuardarEvento();
             }
         });
+    }
+    private void GuardarEvento()
+    {
+        Intent nuevaActivity=new Intent(Modificar.this,Listar.class);
+        Bundle datos=new Bundle();
+        //nuevaActivity.putExtra(Listar.PARAMETRO1,Mio);
+        datos.putSerializable(Modificar.PARAMETRO2,MiEvento);
+        nuevaActivity.putExtras(datos);
+        startActivity(nuevaActivity);
     }
     private void ObtenerReferencias()
     {

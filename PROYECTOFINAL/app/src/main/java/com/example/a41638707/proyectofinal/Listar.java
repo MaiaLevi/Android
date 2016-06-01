@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,10 +25,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Listar extends AppCompatActivity {
-    public static final String PARAMETRO1="com.example.a41638707.proyectofinal.PARAMETRO1";;
+    public static final String PARAMETRO1="com.example.a41638707.proyectofinal.PARAMETRO1";
     ListView lstEventos;
     ArrayList<Evento> ListadoEventos;
-    AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
     Button btnAtras;
     int param;
     //Evento[] vectorEventos=new Evento[]{};
@@ -36,9 +36,12 @@ public class Listar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar);
-        /*Intent elIntent=getIntent();
+        AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
+        Evento EventoCambiado=new Evento();
+        /*BUSCAR COMO HACER PARA QUE ESTO SOLO SE EJECUTE CUANDO SE VUELVE EDE LA ACTIVITY DE MODIFICAR
+        Intent elIntent=getIntent();
         Bundle datos=elIntent.getExtras();
-        ListadoEventos=(ArrayList<Evento>)datos.getSerializable("key");*/
+        Evento EventoCambiado=(Evento)datos.getSerializable(Modificar.PARAMETRO2);*/
         for (int i=0; i<5;i++) {
             Evento prueba = new Evento();
             SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
@@ -49,21 +52,33 @@ public class Listar extends AppCompatActivity {
             } catch (Exception e) {
 
             }
-            int randomNum = rand.nextInt((10 - 4) + 1) + 4;
-            if (i==1)
-            {
-                prueba.Evento(randomNum, "SSI", "Tarea", date, "Redes");
+            if (!(EventoCambiado.getId()==i)) {
+                if (i==0) {
+                    prueba.Evento(0, "Ética", "TP", date, "Marxismo");
+                }
+                else {
+                    if (i == 1) {
+                        prueba.Evento(1, "SSI", "Tarea", date, "Redes");
+                    } else {
+                        if (i == 2) {
+                            prueba.Evento(2, "Matemática", "TP", date, "Derivadas");
+                        } else {
+                            if (i == 3) {
+                                prueba.Evento(3, "Ética", "Prueba", date, "Definición de Estado");
+                            } else {
+                                if (i == 4) {
+                                    prueba.Evento(4, "Matemática", "Prueba", date, "Función por tramos");
+                                } else {
+                                    prueba.Evento(5, "SSI", "TP", date, "S.O.");
+                                }
+                            }
+                        }
+                    }
+                }
             }
             else
             {
-                if (i==2||i==4)
-                {
-                    prueba.Evento(randomNum, "Matemática", "TP", date, "Derivadas");
-                }
-                else
-                {
-                    prueba.Evento(randomNum, "Ética", "Prueba", date, "Definición de Estado");
-                }
+                prueba.Evento(EventoCambiado.getId(),EventoCambiado.getMateria(),EventoCambiado.getTipo(),EventoCambiado.getFecha(),EventoCambiado.getDescripcion());
             }
             list.add(prueba);
         }
@@ -132,7 +147,14 @@ public class Listar extends AppCompatActivity {
             lblTipo.setText(MiEvento.getTipo());
             TextView lblFecha=(TextView) item.findViewById(R.id.LblFecha);
             SimpleDateFormat formatter =new  SimpleDateFormat("yyyy-MM-dd'T'HH");
-            String s= formatter.format(MiEvento.getFecha());
+            String s="";
+            try
+            {
+                 s= formatter.format(MiEvento.getFecha());
+            }
+            catch (Exception e) {
+                s="Formato de fecha no correcto";
+            }
             lblFecha.setText(s);
             return(item);
 
@@ -170,7 +192,7 @@ public class Listar extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     Log.i("Diálogos", "Confirmación Aceptada.");
                     list.remove(param);
-                    lstEventos.setAdapter(adaptador);
+                    ((BaseAdapter) lstEventos.getAdapter()).notifyDataSetChanged();
                     dialog.cancel();
                 }
             });
