@@ -9,16 +9,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ingrese el ID del evento deseado"
-        android:id="@+id/tvwId"
+        android:text="ID del evento elegido:"
+        android:id="@+id/tvwMuestroId"
         android:textSize="25sp" />
 
-    <EditText
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/edtId" />
+        android:text=""
+        android:id="@+id/tvwId"
+        android:textSize="25sp"/>
 
     <TextView
         android:layout_width="wrap_content"
